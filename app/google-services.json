@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "182533606529",
+    "project_id": "secondsemsterwil",
+    "storage_bucket": "secondsemsterwil.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182533606529:android:a43fa9548f59267ee01180",
+        "android_client_info": {
+          "package_name": "com.example.secondsemster"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIZ1wlqrJwptadaF-N7zHbVcPzJpOEtv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
