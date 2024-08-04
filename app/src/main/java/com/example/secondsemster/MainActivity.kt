@@ -3,6 +3,8 @@ package com.example.secondsemster
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.secondsemster.databinding.ActivityMainBinding
@@ -17,6 +19,7 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
 
         initBanner()
+        initBrand()
     }
 
     private fun initBanner() {
@@ -43,5 +46,25 @@ class MainActivity : BaseActivity() {
             binding.dotIndicator.attachTo(binding.viewPageSlider)
         }
 
+    }
+
+    private fun initBrand(){
+        binding.progressBarBrand.visibility = View.VISIBLE
+        viewModel.brands.observe(this, Observer {
+        binding.viewBrand.layoutManager = LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)
+            binding.viewBrand.adapter =BrandAdapter(it)
+            binding.progressBarBrand.visibility = View.GONE
+        })
+        viewModel.loadBrand()
+    }
+
+    private fun initpopular(){
+        binding.progressBarPopular.visibility = View.VISIBLE
+        viewModel.popular.observe(this, Observer {
+            binding.viewPopular.layoutManager = GridLayoutManager(this@MainActivity,2)
+            binding.viewPopular.adapter =BrandAdapter(it)
+            binding.progressBarPopular.visibility = View.GONE
+        })
+        viewModel.loadBrand()
     }
 }

@@ -13,8 +13,12 @@ class mainViewModel():ViewModel() {
     private val firebaseDatabase=FirebaseDatabase.getInstance()
 
     private val _banner=MutableLiveData<List<slideModel>>()
+    private val _brand = MutableLiveData<MutableList<BrandModel>>()
+    private val _popular = MutableLiveData<MutableList<itemModel>>()
 
-     val banners: LiveData<List<slideModel>> = _banner
+    val brands:LiveData<MutableList<BrandModel>> =_brand
+    val popular:LiveData<MutableList<itemModel>> =_popular
+    val banners: LiveData<List<slideModel>> = _banner
 
     fun loadBanners(){
        val Ref = firebaseDatabase.getReference("Banner")
@@ -36,5 +40,45 @@ class mainViewModel():ViewModel() {
 
 
        })
+    }
+    fun loadBrand(){
+        val Ref = firebaseDatabase.getReference("Category")
+        Ref.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val lists = mutableListOf<BrandModel>()
+                for (childSnapshot in snapshot.children){
+                    val list = childSnapshot.getValue(BrandModel::class.java)
+                    if (list!=null){
+                       lists.add(list)
+                    }
+                    _brand.value = lists
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+    fun loadPupolar(){
+        val Ref = firebaseDatabase.getReference("Items")
+        Ref.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val lists = mutableListOf<itemModel>()
+                for (childSnapshot in snapshot.children){
+                    val list = childSnapshot.getValue(itemModel::class.java)
+                    if (list!=null){
+                        lists.add(list)
+                    }
+                    _popular.value = lists
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 }
