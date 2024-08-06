@@ -20,6 +20,7 @@ class MainActivity : BaseActivity() {
 
         initBanner()
         initBrand()
+        initpopular()
     }
 
     private fun initBanner() {
@@ -62,9 +63,9 @@ class MainActivity : BaseActivity() {
         binding.progressBarPopular.visibility = View.VISIBLE
         viewModel.popular.observe(this, Observer {
             binding.viewPopular.layoutManager = GridLayoutManager(this@MainActivity,2)
-            binding.viewPopular.adapter =BrandAdapter(it)
+            binding.viewPopular.adapter = PopularAdapter(it)
             binding.progressBarPopular.visibility = View.GONE
         })
-        viewModel.loadBrand()
+        viewModel.loadPupolar()
     }
 }

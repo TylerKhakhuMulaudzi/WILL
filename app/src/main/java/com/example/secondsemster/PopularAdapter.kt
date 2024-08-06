@@ -32,9 +32,9 @@ class PopularAdapter(val items:MutableList<itemModel>):RecyclerView.Adapter<Popu
             .apply(requestOptions)
             .into(holder.binding.pic)
 
-        holder.itemView.setOnClickListener{
-            val intent = Intent(holder)
-        }
+        /*holder.itemView.setOnClickListener{
+            val intent = Intent(holder.itemView.context)
+        }*/
     }
 
     override fun getItemCount(): Int = items.size
