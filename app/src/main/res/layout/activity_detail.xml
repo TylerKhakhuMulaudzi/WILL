@@ -22,7 +22,7 @@
                 android:layout_marginEnd="16dp">
 
                 <ImageView
-                    android:id="@+id/imageView8"
+                    android:id="@+id/backBtn"
                     android:layout_width="42dp"
                     android:layout_height="36dp"
                     android:src="@tools:sample/avatars"
@@ -32,7 +32,7 @@
                     tools:srcCompat="@drawable/left_back" />
 
                 <ImageView
-                    android:id="@+id/imageView9"
+                    android:id="@+id/favBtn"
                     android:layout_width="52dp"
                     android:layout_height="34dp"
                     android:layout_marginBottom="2dp"
@@ -44,12 +44,142 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/slider"
                 android:layout_width="match_parent"
                 android:layout_height="290dp"
                 android:layout_margin="16dp"
-                android:padding="16dp"
                 android:background="@drawable/grey_bg"
+                android:padding="16dp" />
+
+            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                android:id="@+id/dotIndicator"
+                android:layout_width="139dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:visibility="gone"
+                app:dotsColor="@color/lightgrey"
+                app:dotsSize="8dp"
+                app:dotsSpacing="3dp"
+                app:dotsWidthFactor="2.5"
+                app:selectedDotColor="@color/purple"
+                tools:ignore="MissingClass"
+                tools:visibility="visible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/colorList"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:clipToPadding="false"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="16dp">
+
+                <TextView
+                    android:id="@+id/titleTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Title"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="23sp"/>
+
+                <TextView
+                    android:id="@+id/priceTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="R0"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="173dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Select Size"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    />
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="174dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="8dp"
+                    android:src="@tools:sample/avatars"
+                    tools:srcCompat="@drawable/star" />
+
+                <TextView
+                    android:id="@+id/ratingTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="5" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sizeList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/descriptionTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_margin="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@android:style/Widget.Button"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:id="@+id/addToCartBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/button_lg"
+                    android:text="Buy Now" />
+
+                <ImageButton
+                    android:id="@+id/cartBtn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/grey_bg"
+                    android:scaleType="centerInside"
+                    tools:srcCompat="@drawable/shoppingcart"
+                    app:tint="@color/black" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
