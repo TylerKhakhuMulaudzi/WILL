@@ -14,10 +14,10 @@ class mainViewModel():ViewModel() {
 
     private val _banner=MutableLiveData<List<slideModel>>()
     private val _brand = MutableLiveData<MutableList<BrandModel>>()
-    private val _popular = MutableLiveData<MutableList<itemModel>>()
+    private val _popular = MutableLiveData<MutableList<ItemsModel>>()
 
     val brands:LiveData<MutableList<BrandModel>> =_brand
-    val popular:LiveData<MutableList<itemModel>> =_popular
+    val popular:LiveData<MutableList<ItemsModel>> =_popular
     val banners: LiveData<List<slideModel>> = _banner
 
     fun loadBanners(){
@@ -65,9 +65,9 @@ class mainViewModel():ViewModel() {
         val Ref = firebaseDatabase.getReference("Items")
         Ref.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                val lists = mutableListOf<itemModel>()
+                val lists = mutableListOf<ItemsModel>()
                 for (childSnapshot in snapshot.children){
-                    val list = childSnapshot.getValue(itemModel::class.java)
+                    val list = childSnapshot.getValue(ItemsModel::class.java)
                     if (list!=null){
                         lists.add(list)
                     }
