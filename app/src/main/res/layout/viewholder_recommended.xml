@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_margin="8dp"
-    android:layout_height="215dp">
+    android:layout_height="215dp"
+    android:layout_margin="8dp">
 
     <ImageView
-        android:id="@+id/silverchain"
+        android:id="@+id/pic"
         android:layout_width="164dp"
         android:layout_height="164dp"
         android:background="@drawable/grey_bg"
@@ -36,11 +36,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="R-"
-        android:textSize="18sp"
         android:textColor="@color/black"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/silverchain" />
+        app:layout_constraintTop_toBottomOf="@+id/pic" />
 
     <TextView
         android:id="@+id/ratingTxt"

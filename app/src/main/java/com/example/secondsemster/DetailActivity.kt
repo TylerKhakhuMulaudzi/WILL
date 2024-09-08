@@ -39,7 +39,8 @@ class DetailActivity : BaseActivity() {
             colorList.add(imageUrl)
         }
 
-        binding.colorList.adapter = ColorAdapter
+        binding.colorList.adapter = ColorAdapter(colorList)
+        binding.colorList.layoutManager=LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
     }
 
     private fun banners() {
@@ -48,10 +49,9 @@ class DetailActivity : BaseActivity() {
             sliderItems.add(slideModel(imageUrl))
         }
         binding.slider.adapter = sliderAdpter(sliderItems,binding.slider)
-        binding.slider.clipChildren=false
-        binding.slider.clipToPadding=false
+        binding.slider.clipChildren=true
+        binding.slider.clipToPadding=true
         binding.slider.offscreenPageLimit=3
-        binding.slider.getChildAt(0).overScrollMode= RecyclerView.OVER_SCROLL_NEVER
 
         if (sliderItems.size>1){
             binding.dotIndicator.visibility = View.VISIBLE

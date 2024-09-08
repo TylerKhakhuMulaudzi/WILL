@@ -45,8 +45,6 @@ class SizeAdapter(val items:MutableList<String>):
         }else{
             holder.binding.colorLayout.setBackgroundResource(R.drawable.grey_bg)
             holder.binding.sizeTxt.setTextColor(context.resources.getColor(R.color.black))
-
-
         }
     }
 

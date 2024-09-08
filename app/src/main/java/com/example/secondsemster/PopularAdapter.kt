@@ -1,6 +1,7 @@
 package com.example.secondsemster
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -30,9 +31,11 @@ class PopularAdapter(val items:MutableList<ItemsModel>):RecyclerView.Adapter<Pop
             .apply(requestOptions)
             .into(holder.binding.pic)
 
-        /*holder.itemView.setOnClickListener{
-            val intent = Intent(holder.itemView.context)
-        }*/
+        holder.itemView.setOnClickListener{
+            val intent = Intent(holder.itemView.context,DetailActivity::class.java)
+            intent.putExtra("object",items[position])
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = items.size
