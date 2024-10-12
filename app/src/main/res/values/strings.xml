@@ -3,5 +3,5 @@
     <string name="title">Jewellery made simple</string>
     <string name="catchphrase">Create your own</string>
     <string name="wel_pg_intro">Welcome to silence jewellery the home of jewellery </string>
-    <string name="intro_signIn">Already havr an account? <font color="#6033ba">Sign In</font></string>
+    <string name="intro_signIn">Already have an account? <font color="#6033ba">Sign In</font></string>
 </resources>

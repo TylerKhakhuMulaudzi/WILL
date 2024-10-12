@@ -1,5 +1,6 @@
 package com.example.secondsemster
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -51,7 +52,7 @@ class DetailActivity : BaseActivity() {
         binding.slider.adapter = sliderAdpter(sliderItems,binding.slider)
         binding.slider.clipChildren=true
         binding.slider.clipToPadding=true
-        binding.slider.offscreenPageLimit=3
+        binding.slider.offscreenPageLimit=1
 
         if (sliderItems.size>1){
             binding.dotIndicator.visibility = View.VISIBLE
@@ -72,7 +73,7 @@ class DetailActivity : BaseActivity() {
         }
         binding.backBtn.setOnClickListener {finish()}
         binding.cartBtn.setOnClickListener {
-
+            startActivity(Intent(this@DetailActivity,CartActivity::class.java))
         }
     }
 }
