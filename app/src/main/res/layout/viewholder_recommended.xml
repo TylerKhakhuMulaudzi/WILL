@@ -12,7 +12,7 @@
         android:layout_height="164dp"
         android:background="@drawable/grey_bg"
         android:scaleType="fitCenter"
-        android:src="@tools:sample/avatars"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,7 +24,7 @@
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:src="@tools:sample/avatars"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/grey"
@@ -60,7 +60,7 @@
         android:layout_width="20dp"
         android:layout_height="23dp"
         android:layout_marginEnd="8dp"
-        android:src="@tools:sample/avatars"
+
         app:layout_constraintBottom_toBottomOf="@+id/ratingTxt"
         app:layout_constraintEnd_toStartOf="@+id/ratingTxt"
         app:layout_constraintTop_toTopOf="@+id/ratingTxt"

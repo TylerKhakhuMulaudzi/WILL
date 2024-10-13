@@ -31,7 +31,7 @@
             android:id="@+id/backBtn"
             android:layout_width="51dp"
             android:layout_height="44dp"
-            android:src="@tools:sample/avatars"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

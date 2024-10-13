@@ -1,5 +1,6 @@
 package com.example.secondsemster
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -56,7 +57,7 @@ class mainViewModel():ViewModel() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.e("MainViewModel", "Error loading brands: ${error.message}")
             }
 
         })
@@ -76,7 +77,7 @@ class mainViewModel():ViewModel() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.e("MainViewModel", "Error loading popular items: ${error.message}")
             }
 
         })

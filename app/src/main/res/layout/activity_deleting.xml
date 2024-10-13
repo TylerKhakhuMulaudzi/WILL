@@ -7,8 +7,13 @@
     tools:context=".DeletingActivity">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:id="@+id/scrollView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,14 +28,14 @@
                     android:id="@+id/imageView4"
                     android:layout_width="42dp"
                     android:layout_height="41dp"
-                    android:src="@tools:sample/avatars"
+
                     tools:srcCompat="@drawable/left_back" />
 
                 <ImageView
                     android:id="@+id/imageView7"
                     android:layout_width="47dp"
                     android:layout_height="37dp"
-                    android:src="@tools:sample/avatars"
+
                     tools:layout_editor_absoluteX="361dp"
                     tools:layout_editor_absoluteY="2dp"
                     tools:srcCompat="@drawable/heart" />

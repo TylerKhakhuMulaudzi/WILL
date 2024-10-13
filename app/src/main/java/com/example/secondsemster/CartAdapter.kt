@@ -6,12 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.request.RequestOptions
 import com.example.project1762.Helper.ChangeNumberItemsListener
 import com.example.project1762.Helper.ManagmentCart
-import  com.example.secondsemster.ItemsModel
-import com.example.secondsemster.databinding.ActivityDetailBinding
+import com.example.secondsemster.ItemsModel
 import com.example.secondsemster.databinding.ViewholderCartBinding
-import com.google.ai.client.generativeai.common.RequestOptions
 
 class CartAdapter(private val listItemsModel:ArrayList<ItemsModel>,
     context:Context,
@@ -26,7 +25,7 @@ class CartAdapter(private val listItemsModel:ArrayList<ItemsModel>,
     }
 
     override fun onBindViewHolder(holder: CartAdapter.ViewHolder, position: Int) {
-        val item = listItemSelected[position]
+        val item = listItemsModel[position]
 
         holder.binding.titleTxt.text = item.title
         holder.binding.feeEachItem.text ="$${item.price}"
@@ -39,7 +38,7 @@ class CartAdapter(private val listItemsModel:ArrayList<ItemsModel>,
             .into(holder.binding.pic)
 
         holder.binding.plusCartBtn.setOnClickListener {
-        managementCart.plusItem(listItemSelected,position,object:ChangeNumberItemsListener{
+        managementCart.plusItem(listItemsModel,position,object:ChangeNumberItemsListener{
             override fun onChanged() {
                 notifyDataSetChanged()
                 changeNumberItemsListener?.onChanged()
@@ -47,7 +46,7 @@ class CartAdapter(private val listItemsModel:ArrayList<ItemsModel>,
         })
         }
         holder.binding.minusCartBtn.setOnClickListener {
-            managementCart.minusItem(listItemSelected,position,object:ChangeNumberItemsListener{
+            managementCart.minusItem(listItemsModel,position,object:ChangeNumberItemsListener{
                 override fun onChanged() {
                     notifyDataSetChanged()
                     changeNumberItemsListener?.onChanged()
@@ -57,6 +56,6 @@ class CartAdapter(private val listItemsModel:ArrayList<ItemsModel>,
 
     }
 
-    override fun getItemCount(): Int=listItemSelected.size
+    override fun getItemCount(): Int=listItemsModel.size
 
 }

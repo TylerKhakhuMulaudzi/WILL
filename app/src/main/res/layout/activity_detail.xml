@@ -25,7 +25,7 @@
                     android:id="@+id/backBtn"
                     android:layout_width="42dp"
                     android:layout_height="36dp"
-                    android:src="@tools:sample/avatars"
+
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +36,6 @@
                     android:layout_width="52dp"
                     android:layout_height="34dp"
                     android:layout_marginBottom="2dp"
-                    android:src="@tools:sample/avatars"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -126,7 +125,7 @@
                     android:layout_width="174dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
-                    android:src="@tools:sample/avatars"
+
                     tools:srcCompat="@drawable/star" />
 
                 <TextView
