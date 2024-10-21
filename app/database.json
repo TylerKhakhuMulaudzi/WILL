@@ -1,0 +1,79 @@
+{
+  "Banner": [
+    {
+      "url": ""
+    },
+    {
+      "url": ""
+    }
+  ],
+  "Category": [
+    {
+      "id": 0,
+      "picUrl": "https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/pendants%2Fpendant1.jpeg?alt=media&token=200cc72f-41c1-4732-8d2c-47fe6229b224",
+      "title": "pendents"
+    },{
+      "id": 1,
+      "picUrl": "https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/necklace%2Fnecklace1.jpeg?alt=media&token=fd03993f-c28a-44eb-8117-30696767bb73",
+      "title": "necklace"
+    },{
+      "id": 2,
+      "picUrl": "https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/braclets%2Fbracelet.jpeg?alt=media&token=53dff43a-3a0c-4273-a975-09a2b1dc6e07",
+      "title": "bracelets"
+    },{
+      "id": 3,
+      "picUrl": "https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/keyholder%2Fkeyholder1.jpeg?alt=media&token=77194882-a446-48a5-897d-580d2b2d306b",
+      "title": "keyholder"
+    }
+  ],
+  "Items": [
+    {
+      "description": "Silver round and rectangle engraved pendant. available in silver, gold and rose gold",
+      "picUrl": ["https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/necklace%2Fnecklace.jpeg?alt=media&token=dacf586a-5b91-4d01-8b28-ea1290f51602"],
+      "price": 300,
+      "rating": 4.6,
+      "size": [
+        "S",
+        "M",
+        "L"
+      ],
+      "title": "Necklace"
+    },
+    {
+      "description": "Round engraved pendant, available in silver, gold and rose gold",
+      "picUrl": ["https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/pendants%2Fpendant3.jpeg?alt=media&token=a989e2db-b126-4122-847a-4c8a23f2412f"],
+      "price": 280,
+      "rating": 4.1,
+      "size": [
+        "S",
+        "M",
+        "L"
+      ],
+      "title": "Pendents"
+    },
+    {
+      "description": "",
+      "picUrl": ["https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/braclets%2Fbracelet.jpeg?alt=media&token=53dff43a-3a0c-4273-a975-09a2b1dc6e07"],
+      "price": 280,
+      "rating": 4.5,
+      "size": [
+        "S",
+        "M",
+        "L"
+      ],
+      "title": "bracelets"
+    },
+    {
+      "description": "Engraved key holder in silver ",
+      "picUrl": ["https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/keyholder%2Fkeyholder2.jpeg?alt=media&token=8a33b5b0-248f-472f-97a9-dbbab577c58d"],
+      "price": 200,
+      "rating": 4.2,
+      "size": [
+        "S",
+        "M",
+        "L"
+      ],
+      "title": "KeyHolder"
+    }
+  ]
+}

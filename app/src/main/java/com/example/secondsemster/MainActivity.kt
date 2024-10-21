@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.secondsemster.databinding.ActivityMainBinding
 import androidx.viewpager2.widget.CompositePageTransformer
+import com.google.firebase.FirebaseApp
 
 class MainActivity : BaseActivity() {
+
     private val viewModel = mainViewModel()
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +25,7 @@ class MainActivity : BaseActivity() {
         initBrand()
         initpopular()
         initBottomMenu()
+        FirebaseApp.initializeApp(this)
     }
 
     private fun initBottomMenu() {
@@ -62,7 +65,7 @@ class MainActivity : BaseActivity() {
             binding.viewBrand.adapter =BrandAdapter(it)
             binding.progressBarBrand.visibility = View.GONE
         })
-        viewModel.loadBrand()
+        viewModel.loadBrands()
     }
 
     private fun initpopular(){
@@ -72,6 +75,6 @@ class MainActivity : BaseActivity() {
             binding.viewPopular.adapter = PopularAdapter(it)
             binding.progressBarPopular.visibility = View.GONE
         })
-        viewModel.loadPupolar()
+        viewModel.loadPopularItems()
     }
 }

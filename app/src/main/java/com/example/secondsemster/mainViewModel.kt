@@ -21,65 +21,73 @@ class mainViewModel():ViewModel() {
     val popular:LiveData<MutableList<ItemsModel>> =_popular
     val banners: LiveData<List<slideModel>> = _banner
 
-    fun loadBanners(){
-       val Ref = firebaseDatabase.getReference("Banner")
-       Ref.addValueEventListener(object: ValueEventListener{
-           override fun onDataChange(snapshot: DataSnapshot) {
-               val lists = mutableListOf<slideModel>()
-               for (childSnapshot in snapshot.children){
-                   val list = childSnapshot.getValue(slideModel::class.java)
-                   if (list!=null){
-                       lists.add(list)
-                   }
-               }
-               _banner.value = lists
-           }
+    fun loadBanners() {
+        val Ref = firebaseDatabase.getReference("Banner")
+        Ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val lists = mutableListOf<slideModel>()
+                for (childSnapshot in snapshot.children) {
+                    val list = childSnapshot.getValue(slideModel::class.java)
+                    if (list != null) {
+                        lists.add(list)
+                        Log.d("MainViewModel", "Banner loaded: ${list.url}")
+                    } else {
+                        Log.w("MainViewModel", "Null banner data encountered for key: ${childSnapshot.key}")
+                    }
+                }
+                _banner.value = lists
+                Log.d("MainViewModel", "Total banners loaded: ${lists.size}")
+            }
 
-           override fun onCancelled(error: DatabaseError) {
-
-           }
-
-
-       })
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("MainViewModel", "Error loading banners: ${error.message}")
+            }
+        })
     }
-    fun loadBrand(){
+    fun loadBrands() {
         val Ref = firebaseDatabase.getReference("Category")
-        Ref.addValueEventListener(object :ValueEventListener{
+        Ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val lists = mutableListOf<BrandModel>()
-                for (childSnapshot in snapshot.children){
+                for (childSnapshot in snapshot.children) {
                     val list = childSnapshot.getValue(BrandModel::class.java)
-                    if (list!=null){
-                       lists.add(list)
+                    if (list != null) {
+                        lists.add(list)
+                        Log.d("MainViewModel", "Brand loaded: ${list.title}, Image URL: ${list.picUrl}")
+                    } else {
+                        Log.w("MainViewModel", "Null brand data encountered for key: ${childSnapshot.key}")
                     }
-                    _brand.value = lists
                 }
+                _brand.value = lists
+                Log.d("MainViewModel", "Total brands loaded: ${lists.size}")
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Log.e("MainViewModel", "Error loading brands: ${error.message}")
             }
-
         })
     }
-    fun loadPupolar(){
+    fun loadPopularItems() {
         val Ref = firebaseDatabase.getReference("Items")
-        Ref.addValueEventListener(object :ValueEventListener{
+        Ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val lists = mutableListOf<ItemsModel>()
-                for (childSnapshot in snapshot.children){
+                for (childSnapshot in snapshot.children) {
                     val list = childSnapshot.getValue(ItemsModel::class.java)
-                    if (list!=null){
+                    if (list != null) {
                         lists.add(list)
+                        Log.d("MainViewModel", "Item loaded: ${list.title}, Price: ${list.price}, First Image URL: ${list.picUrl.firstOrNull()}")
+                    } else {
+                        Log.w("MainViewModel", "Null item data encountered for key: ${childSnapshot.key}")
                     }
-                    _popular.value = lists
                 }
+                _popular.value = lists
+                Log.d("MainViewModel", "Total popular items loaded: ${lists.size}")
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Log.e("MainViewModel", "Error loading popular items: ${error.message}")
             }
-
         })
     }
 }
