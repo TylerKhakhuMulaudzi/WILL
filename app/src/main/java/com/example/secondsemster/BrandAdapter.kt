@@ -19,17 +19,18 @@ import com.example.secondsemster.databinding.ViewholderBrandBinding
 
 class BrandAdapter( val items:MutableList<BrandModel>):
     RecyclerView.Adapter<BrandAdapter.Viewholder>() {
-        private var selectedPosition =-1
-        private var lastSelectedPosition = -1
-    private lateinit var context : Context
-    class Viewholder(val binding:ViewholderBrandBinding):
+    private var selectedPosition = -1
+    private var lastSelectedPosition = -1
+    private lateinit var context: Context
+
+    class Viewholder(val binding: ViewholderBrandBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BrandAdapter.Viewholder {
         context = parent.context
-        val binding = ViewholderBrandBinding.inflate(LayoutInflater.from(context),parent,false)
+        val binding = ViewholderBrandBinding.inflate(LayoutInflater.from(context), parent, false)
         return Viewholder(binding)
     }
 
@@ -38,31 +39,32 @@ class BrandAdapter( val items:MutableList<BrandModel>):
         val currentItem = items[holder.adapterPosition]
 
         holder.binding.title.text = currentItem.title
+            /*if (!currentItem.picUrl.isNullOrEmpty()){*/
+            Glide.with(holder.itemView.context)
+                .load(currentItem.picUrl)
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        Log.e("GlideError", "Error loading image: ${currentItem.picUrl}", e)
+                        return false
+                    }
 
-        Glide.with(holder.itemView.context)
-            .load(currentItem.picUrl)
-            .listener(object : RequestListener<Drawable> {
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Drawable>,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    Log.e("GlideError", "Error loading image: ${currentItem.picUrl}", e)
-                    return false
-                }
+                    override fun onResourceReady(
+                        resource: Drawable,
+                        model: Any,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        return false
+                    }
+                })
+                .into(holder.binding.pic)
 
-                override fun onResourceReady(
-                    resource: Drawable,
-                    model: Any,
-                    target: Target<Drawable>?,
-                    dataSource: DataSource,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    return false
-                }
-            })
-            .into(holder.binding.pic)
 
         holder.binding.root.setOnClickListener {
             lastSelectedPosition = selectedPosition
@@ -75,17 +77,26 @@ class BrandAdapter( val items:MutableList<BrandModel>):
         if (selectedPosition == holder.adapterPosition) {
             holder.binding.pic.setBackgroundResource(0)
             holder.binding.mainLayout.setBackgroundResource(R.drawable.button_lg)
-            ImageViewCompat.setImageTintList(holder.binding.pic, ColorStateList.valueOf(context.getColor(R.color.white)))
+            ImageViewCompat.setImageTintList(
+                holder.binding.pic,
+                ColorStateList.valueOf(context.getColor(R.color.white))
+            )
 
             holder.binding.title.visibility = View.VISIBLE
         } else {
             holder.binding.pic.setBackgroundResource(R.drawable.grey_bg)
             holder.binding.mainLayout.setBackgroundResource(0)
-            ImageViewCompat.setImageTintList(holder.binding.pic, ColorStateList.valueOf(context.getColor(R.color.white)))
+            ImageViewCompat.setImageTintList(
+                holder.binding.pic,
+                ColorStateList.valueOf(context.getColor(R.color.white))
+            )
 
             holder.binding.title.visibility = View.GONE
         }
-    }
+    }/*
+    }else{
+        error("picUrl is null or empty")
+    }*/
 
     override fun getItemCount(): Int = items.size
 }

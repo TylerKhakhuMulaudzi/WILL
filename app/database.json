@@ -1,28 +1,28 @@
 {
   "Banner": [
     {
-      "url": ""
+      "url": "https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/banners%2Fbanner2.png?alt=media&token=77be4744-f354-4e7d-9140-cb8691555eed"
     },
     {
-      "url": ""
+      "url": "https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/banners%2Fbanner1.png?alt=media&token=b900ece2-8ee4-4e58-aacf-bf053b4bb12b"
     }
   ],
   "Category": [
     {
       "id": 0,
-      "picUrl": "https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/pendants%2Fpendant1.jpeg?alt=media&token=200cc72f-41c1-4732-8d2c-47fe6229b224",
+      "picUrl": "https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/logoforcategories%2FpandentLogo.png?alt=media&token=77d2eff5-64cc-41a5-8f2b-b7f93cb191ae",
       "title": "pendents"
     },{
       "id": 1,
-      "picUrl": "https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/necklace%2Fnecklace1.jpeg?alt=media&token=fd03993f-c28a-44eb-8117-30696767bb73",
+      "picUrl": "https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/logoforcategories%2FnecklaceLogo.png?alt=media&token=97f1d752-7d8b-400a-b3a9-f03485901f6b",
       "title": "necklace"
     },{
       "id": 2,
-      "picUrl": "https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/braclets%2Fbracelet.jpeg?alt=media&token=53dff43a-3a0c-4273-a975-09a2b1dc6e07",
+      "picUrl": "https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/logoforcategories%2FbraceletLogo.png?alt=media&token=007fc488-f181-49bb-92ee-9fa9501b3825",
       "title": "bracelets"
     },{
       "id": 3,
-      "picUrl": "https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/keyholder%2Fkeyholder1.jpeg?alt=media&token=77194882-a446-48a5-897d-580d2b2d306b",
+      "picUrl": "https://firebasestorage.googleapis.com/v0/b/secondsemsterwil.appspot.com/o/logoforcategories%2FkeyLogo.png?alt=media&token=3b33a875-1b7b-4fc0-9e9d-22ff6f8a7bc8",
       "title": "keyholder"
     }
   ],
