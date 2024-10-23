@@ -253,8 +253,8 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
-
-                tools:srcCompat="@drawable/direction" />
+                android:src="@drawable/direction"
+                />
 
             <TextView
                 android:id="@+id/textView91"
@@ -280,8 +280,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
-
-                tools:srcCompat="@drawable/shoppingcart" />
+                android:src="@drawable/shoppingcart" />
 
             <TextView
                 android:id="@+id/textView92"
@@ -306,8 +305,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
-
-                tools:srcCompat="@drawable/heart" />
+                android:src="@drawable/heart" />
 
             <TextView
                 android:id="@+id/textView93"
@@ -332,8 +330,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
-
-                tools:srcCompat="@drawable/todolist" />
+                android:src="@drawable/todolist" />
 
             <TextView
                 android:id="@+id/textView95"
@@ -359,8 +356,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
-
-                tools:srcCompat="@drawable/user" />
+                android:src="@drawable/user"/>
 
             <TextView
                 android:id="@+id/textView96"
