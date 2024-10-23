@@ -30,6 +30,8 @@ class MainActivity : BaseActivity() {
 
     private fun initBottomMenu() {
         binding.cartBtn.setOnClickListener{startActivity(Intent(this@MainActivity,CartActivity::class.java))}
+        binding.viewProfile.setOnClickListener{startActivity(Intent(this@MainActivity,ProfileActivity::class.java))}
+        binding.explorer.setOnClickListener { startActivity(Intent(this@MainActivity,MainActivity::class.java))}
     }
 
     private fun initBanner() {

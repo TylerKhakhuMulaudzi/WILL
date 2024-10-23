@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scrollView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:ignore="ExtraText">
+
+            <!-- Profile Picture -->
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="Profile Picture"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user"
+                tools:srcCompat="@drawable/user" />
+
+            <Button
+                android:id="@+id/change_profile_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change Profile Picture" />
+
+            <!-- Name -->
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="367dp"
+                android:layout_height="48dp"
+                android:hint="Name"
+                android:inputType="textPersonName" />
+
+            <!-- Email (Non-editable) -->
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="340dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:text="Email" />
+
+            <!-- Phone Number -->
+            <EditText
+                android:id="@+id/edit_phone"
+                android:layout_width="367dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:hint="Phone Number (Optional)"
+                android:inputType="phone" />
+
+            <!-- Address -->
+            <EditText
+                android:id="@+id/edit_address"
+                android:layout_width="367dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:hint="Address (Optional)"
+                android:inputType="textPostalAddress" />
+
+            <!-- Password -->
+            <EditText
+                android:id="@+id/edit_password"
+                android:layout_width="364dp"
+                android:layout_height="58dp"
+                android:layout_marginTop="8dp"
+                android:hint="Password"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/change_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Change Password" />
+
+            <!-- Payment Details Section -->
+            <TextView
+                android:id="@+id/payment_details_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Payment Details"
+                android:textStyle="bold" />
+
+            <!-- Card Payment Header with Arrow -->
+            <LinearLayout
+                android:id="@+id/card_payment_header_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/card_payment_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Card Payment"
+                    android:textStyle="bold" />
+
+                <!-- Arrow to expand/collapse -->
+                <ImageView
+                    android:id="@+id/card_arrow"
+                    android:layout_width="29dp"
+                    android:layout_height="25dp"
+                    tools:srcCompat="@drawable/left_back" />
+            </LinearLayout>
+
+            <!-- Card Payment Details (Initially Hidden) -->
+            <LinearLayout
+                android:id="@+id/card_payment_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/edit_cardholder_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cardholder Name"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/edit_card_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Card Number"
+                    android:inputType="number" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!-- Expiry Date -->
+                    <EditText
+                        android:id="@+id/edit_expiry_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Expiry Date (MM/YY)"
+                        android:inputType="date" />
+
+                    <!-- CVV Code -->
+                    <EditText
+                        android:id="@+id/edit_cvv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="CVV"
+                        android:inputType="numberPassword" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- EFT Payment Header with Arrow -->
+            <LinearLayout
+                android:id="@+id/eft_payment_header_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/eft_payment_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="EFT Payment"
+                    android:textStyle="bold" />
+
+                <!-- Arrow to expand/collapse -->
+                <ImageView
+                    android:id="@+id/eft_arrow"
+                    android:layout_width="28dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/left_back" />
+            </LinearLayout>
+
+            <!-- EFT Payment Details (Initially Hidden) -->
+            <LinearLayout
+                android:id="@+id/eft_payment_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/bank_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Bank Name: XYZ Bank\nAccount Name: Gift of the Givers Foundation\nAccount Number: 123456789" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

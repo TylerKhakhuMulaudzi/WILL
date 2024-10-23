@@ -241,6 +241,7 @@
         android:layout_marginBottom="8dp">
 
         <LinearLayout
+            android:id="@+id/explorer"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
@@ -346,6 +347,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/viewProfile"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"

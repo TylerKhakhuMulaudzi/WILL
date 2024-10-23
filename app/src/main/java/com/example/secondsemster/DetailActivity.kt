@@ -11,6 +11,7 @@ import com.example.secondsemster.databinding.ActivityDetailBinding
 import java.util.ResourceBundle.getBundle
 
 class DetailActivity : BaseActivity() {
+
     private lateinit var binding: ActivityDetailBinding
     private lateinit var item:ItemsModel
     private var numberOrder = 1
