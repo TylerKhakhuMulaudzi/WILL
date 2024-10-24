@@ -176,7 +176,7 @@
                     android:layout_margin="8dp"
                     android:background="@drawable/grey_bg"
                     android:scaleType="centerInside"
-                    tools:srcCompat="@drawable/shoppingcart"
+                    android:src="@drawable/heart"
                     app:tint="@color/black" />
             </LinearLayout>
         </LinearLayout>

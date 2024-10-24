@@ -16,12 +16,15 @@ class DetailActivity : BaseActivity() {
     private lateinit var item:ItemsModel
     private var numberOrder = 1
     private lateinit var managmentCart: ManagmentCart
+    private lateinit var managmentWishlist: ManagmentWishlist
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         managmentCart = ManagmentCart(this)
+        managmentWishlist = ManagmentWishlist(this)
 
         getBundle()
         banners()
@@ -64,17 +67,50 @@ class DetailActivity : BaseActivity() {
     private fun getBundle() {
         item = intent.getParcelableExtra("object")!!
 
-        binding.titleTxt.text=item.title
-        binding.descriptionTxt.text=item.description
-        binding.priceTxt.text="R"+item.price
-        binding.ratingTxt.text="${item.rating} Rating"
+        binding.titleTxt.text = item.title
+        binding.descriptionTxt.text = item.description
+        binding.priceTxt.text = "R" + item.price
+        binding.ratingTxt.text = "${item.rating} Rating"
+
         binding.addToCartBtn.setOnClickListener {
             item.numberInCart = numberOrder
             managmentCart.insertFood(item)
         }
-        binding.backBtn.setOnClickListener {finish()}
+
+        binding.backBtn.setOnClickListener { finish() }
+
         binding.cartBtn.setOnClickListener {
-            startActivity(Intent(this@DetailActivity,CartActivity::class.java))
+            if (!managmentWishlist.isInWishlist(item)) {
+                managmentWishlist.addToWishlist(item)
+            }
+            android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                val intent = Intent(this@DetailActivity, wishlist::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(intent)
+            }, 100)
         }
+
+        binding.favBtn.setOnClickListener {
+            if (managmentWishlist.isInWishlist(item)) {
+                managmentWishlist.removeFromWishlist(
+                    managmentWishlist.getWishlist().indexOfFirst { it.title == item.title }
+                )
+            } else {
+                managmentWishlist.addToWishlist(item)
+            }
+            updateWishlistButtonAppearance()
+        }
+    }
+
+    private fun updateWishlistButtonAppearance() {
+        val isInWishlist = managmentWishlist.isInWishlist(item)
+        binding.favBtn.setImageResource(
+            if (isInWishlist) R.drawable.heart_filled
+            else R.drawable.heart
+        )
+        binding.cartBtn.setImageResource(
+            if (isInWishlist) R.drawable.heart_filled
+            else R.drawable.heart
+        )
     }
 }

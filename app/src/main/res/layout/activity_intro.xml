@@ -19,7 +19,7 @@
                 android:id="@+id/imageView3"
                 android:layout_width="410dp"
                 android:layout_height="401dp"
-                tools:srcCompat="@drawable/logo" />
+                android:src="@drawable/logo" />
 
             <TextView
                 android:id="@+id/textView"
