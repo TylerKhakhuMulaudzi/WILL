@@ -62,6 +62,7 @@ class ProfileActivity : AppCompatActivity() {
         editCardholderName = findViewById(R.id.edit_cardholder_name)
         editCardNumber = findViewById(R.id.edit_card_number)
         editExpiryDate = findViewById(R.id.edit_expiry_date)
+        editCvv = findViewById(R.id.edit_cvv)
         saveBankDetails = findViewById(R.id.saveDetails)
 
 

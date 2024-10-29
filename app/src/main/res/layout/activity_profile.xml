@@ -37,12 +37,6 @@
                 android:src="@drawable/user"
                 tools:srcCompat="@drawable/user" />
 
-            <Button
-                android:id="@+id/change_profile_picture"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Change Profile Picture" />
-
             <!-- Name -->
             <EditText
                 android:id="@+id/edit_name"
@@ -93,6 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:backgroundTint="@color/purple"
                 android:text="login" />
 
             <!-- Payment Details Section -->
@@ -181,6 +176,7 @@
                     android:id="@+id/saveDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/purple"
                     android:text="Save" />
             </LinearLayout>
 

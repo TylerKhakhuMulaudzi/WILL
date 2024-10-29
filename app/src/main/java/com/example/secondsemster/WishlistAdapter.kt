@@ -37,6 +37,8 @@ class WishlistAdapter (
 
         holder.binding.removeBtn.setOnClickListener {
             managementWishlist.removeFromWishlist(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, itemCount)
             notifyDataSetChanged()
         }
     }

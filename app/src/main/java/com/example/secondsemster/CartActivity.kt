@@ -62,8 +62,8 @@ class CartActivity : AppCompatActivity() {
     private fun calculateCart(){
         val percentTax = 0.02
         val delivery = 101.0
-        tax = Math.round((managmentCart.getTotalFee()*percentTax)*100)/100.0
-        val total=Math.round((managmentCart.getTotalFee()+tax+delivery)*100)/1
+        tax = Math.round((managmentCart.getTotalFee()*percentTax))/115.0
+        val total=Math.round((managmentCart.getTotalFee()+tax+delivery))/1
         val itemTotal = Math.round(managmentCart.getTotalFee())/100
 
         with(binding){
@@ -94,8 +94,8 @@ class CartActivity : AppCompatActivity() {
 
         val orderId = UUID.randomUUID().toString()
         val items = managmentCart.getListCart()
-        val delivery = 10.0
-        val itemTotal = Math.round(managmentCart.getTotalFee() * 100) / 100.0
+        val delivery = 100.0
+        val itemTotal = Math.round(managmentCart.getTotalFee()) / 115.0
         val total = Math.round((managmentCart.getTotalFee() + tax + delivery) * 100) / 1.0
 
 
