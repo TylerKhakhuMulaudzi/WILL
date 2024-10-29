@@ -21,6 +21,7 @@ class mainViewModel():ViewModel() {
     val popular:LiveData<MutableList<ItemsModel>> =_popular
     val banners: LiveData<List<slideModel>> = _banner
 
+
     fun loadBanners() {
         val Ref = firebaseDatabase.getReference("Banner")
         Ref.addValueEventListener(object : ValueEventListener {

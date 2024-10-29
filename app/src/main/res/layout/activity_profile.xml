@@ -52,14 +52,16 @@
                 android:inputType="textPersonName" />
 
             <!-- Email (Non-editable) -->
-            <TextView
-                android:id="@+id/email"
-                android:layout_width="340dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:text="Email" />
 
             <!-- Phone Number -->
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="367dp"
+                android:layout_height="55dp"
+                android:ems="10"
+                android:hint="Enter email"
+                android:inputType="textEmailAddress" />
+
             <EditText
                 android:id="@+id/edit_phone"
                 android:layout_width="367dp"
@@ -124,7 +126,7 @@
                     android:id="@+id/card_arrow"
                     android:layout_width="29dp"
                     android:layout_height="25dp"
-                    tools:srcCompat="@drawable/left_back" />
+                    android:src="@drawable/left_back"/>
             </LinearLayout>
 
             <!-- Card Payment Details (Initially Hidden) -->
@@ -174,6 +176,12 @@
                         android:hint="CVV"
                         android:inputType="numberPassword" />
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/saveDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Save" />
             </LinearLayout>
 
             <!-- EFT Payment Header with Arrow -->

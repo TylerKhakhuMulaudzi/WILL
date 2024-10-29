@@ -28,12 +28,15 @@ class CartActivity : AppCompatActivity() {
     private lateinit var database: FirebaseDatabase
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
+   // val storedEmail = intent.getStringExtra("email")
+    private var someString: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        someString = intent.getStringExtra("email")
         auth = FirebaseAuth.getInstance()
         managmentCart= ManagmentCart(this)
         database = FirebaseDatabase.getInstance()
@@ -58,10 +61,10 @@ class CartActivity : AppCompatActivity() {
     }
     private fun calculateCart(){
         val percentTax = 0.02
-        val delivery = 10.0
+        val delivery = 101.0
         tax = Math.round((managmentCart.getTotalFee()*percentTax)*100)/100.0
         val total=Math.round((managmentCart.getTotalFee()+tax+delivery)*100)/1
-        val itemTotal = Math.round(managmentCart.getTotalFee()*100)/100
+        val itemTotal = Math.round(managmentCart.getTotalFee())/100
 
         with(binding){
             totalFeeTxt.text = "R$itemTotal"
@@ -83,26 +86,26 @@ class CartActivity : AppCompatActivity() {
         }
     }
     private fun saveOrderToFirebase() {
-        val currentUser = auth.currentUser
-        if (currentUser == null) {
+        val currentEmail = someString
+        if (currentEmail.isNullOrEmpty()) {
             Toast.makeText(this, "User not logged in, Please login first", Toast.LENGTH_SHORT).show()
             return
         }
+
         val orderId = UUID.randomUUID().toString()
         val items = managmentCart.getListCart()
         val delivery = 10.0
         val itemTotal = Math.round(managmentCart.getTotalFee() * 100) / 100.0
         val total = Math.round((managmentCart.getTotalFee() + tax + delivery) * 100) / 1.0
 
-        // Create order details
-        val order = hashMapOf(
+
+        val order = hashMapOf<String, Any>(
             "orderId" to orderId,
-            "userId" to currentUser.uid,
-            "userEmail" to currentUser.email,
+            "userEmail" to currentEmail,
             "timestamp" to System.currentTimeMillis(),
             "items" to items.map { item ->
-                hashMapOf(
-                    "title" to item.title,
+                hashMapOf<String, Any>(
+                    "title" to (item.title ?: ""),
                     "price" to item.price,
                     "numberInCart" to item.numberInCart,
                     "size" to (item.size.firstOrNull() ?: ""),
@@ -117,21 +120,23 @@ class CartActivity : AppCompatActivity() {
             "emailSent" to false
         )
 
-        // Save to Firebase Realtime Database under 'orders' node
         val orderRef = database.reference.child("orders").child(orderId)
         orderRef.setValue(order)
             .addOnSuccessListener {
                 Toast.makeText(this, "Order placed successfully, confirmation email will be sent shortly", Toast.LENGTH_SHORT).show()
-                managmentCart.clearCart()  // Clear the cart after successful order
+                managmentCart.clearCart()
+                sendOrderConfirmationEmail(currentEmail, order, orderId)
                 finish()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Failed to place order: ${e.message}", Toast.LENGTH_SHORT).show()
             }
+
     }
-    private fun sendOrderConfirmationEmail(userEmail: String, order: HashMap<String, Any>, orderId: String) {
+    private fun sendOrderConfirmationEmail(someString: String, order: HashMap<String, Any>, orderId: String) {
         Thread{
             try {
+
                 val props = Properties()
                 props.put("mail.smtp.host", "smtp.gmail.com")
                 props.put("mail.smtp.socketFactory.port", "465")
@@ -146,11 +151,11 @@ class CartActivity : AppCompatActivity() {
                 })
                 val message = MimeMessage(session)
                 message.setFrom(InternetAddress("tylerkhakhu@gmail.com"))
-                message.addRecipient(Message.RecipientType.TO, InternetAddress(userEmail))
+                message.addRecipient(Message.RecipientType.TO, InternetAddress(someString))
                 message.subject = "Order Confirmation"
 
-                val items = order["items"] as List<HashMap<String, Any>>
-                val total = order["total"] as Double
+                val items = (order["items"] as? List<HashMap<String, Any>>) ?: listOf()
+                val total = (order["total"] as? Double) ?: 0.0
 
                 val emailContent = StringBuilder()
                 emailContent.append("<html><body>")
@@ -174,6 +179,8 @@ class CartActivity : AppCompatActivity() {
                 emailContent.append("</body></html>")
 
                 message.setContent(emailContent.toString(), "text/html; charset=utf-8")
+                message.setFrom(InternetAddress("tylerkhakhu@gmail.com"))
+                message.addRecipient(Message.RecipientType.TO, InternetAddress(someString))
 
                 Transport.send(message)
 

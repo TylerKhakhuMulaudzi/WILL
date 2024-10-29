@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,25 +15,38 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.secondsemster.databinding.ActivityMainBinding
 import androidx.viewpager2.widget.CompositePageTransformer
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
+import com.google.firebase.initialize
 import com.google.firebase.messaging.FirebaseMessaging
 import io.reactivex.internal.util.HalfSerializer.onComplete
 
 class MainActivity : BaseActivity() {
-
+    private lateinit var getUserName: TextView
     private val viewModel = mainViewModel()
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        getUserName = findViewById(R.id.textView5)
+
+        val userName = intent.getStringExtra("USER_NAME")
+        getUserName.clearComposingText()
+        if (userName == null) {
+            getUserName.text = "Guest"
+        } else {
+            getUserName.text = userName.toString()
+        }
 
         initBanner()
         initBrand()
         initpopular()
         initBottomMenu()
         FirebaseApp.initializeApp(this)
+        Firebase.initialize(this)
     }
 
     private fun initBottomMenu() {
