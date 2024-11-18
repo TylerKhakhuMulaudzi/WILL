@@ -36,7 +36,7 @@ android {
         textReport = true
         htmlReport = true
         xmlReport = true
-        sarifReport = true
+        sarifReport = false
         baseline = file("lint-baseline.xml")
         disable.addAll(setOf(
             "ObsoleteLintCustomCheck",
@@ -44,9 +44,6 @@ android {
             "Typos",
             "UnusedIds"
         ))
-        htmlOutput = file("build/reports/lint-results-debug.html")
-        xmlOutput = file("build/reports/lint-results-debug.xml")
-        sarifOutput = file("build/reports/lint-results.sarif")
     }
 
     compileOptions {
@@ -60,19 +57,6 @@ android {
 
     buildFeatures {
         viewBinding = true
-    }
-
-    packaging {
-        resources {
-            excludes.add("META-INF/DEPENDENCIES")
-            excludes.add("META-INF/LICENSE")
-            excludes.add("META-INF/LICENSE.txt")
-            excludes.add("META-INF/license.txt")
-            excludes.add("META-INF/NOTICE")
-            excludes.add("META-INF/NOTICE.txt")
-            excludes.add("META-INF/notice.txt")
-            excludes.add("META-INF/*.kotlin_module")
-        }
     }
 }
 

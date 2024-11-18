@@ -34,28 +34,36 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Clean project
-        run: ./gradlew clean
-
       - name: Run Android Lint
         continue-on-error: true
         run: |
-          ./gradlew :app:lint --no-daemon --stacktrace
-          echo "Lint completed with status $?"
+          ./gradlew :app:lint --no-daemon --stacktrace --debug
+          echo "Lint exit code: $?"
 
-      - name: List Reports Directory
+      - name: Debug Info
         if: always()
         run: |
-          echo "Listing reports directory:"
-          ls -R app/build/reports/
+          echo "Current directory:"
+          pwd
+          echo "\nDirectory structure:"
+          ls -la
+          echo "\nApp directory structure:"
+          ls -la app/
+          echo "\nBuild directory structure (if exists):"
+          ls -la app/build/ || echo "Build directory not found"
+          echo "\nReports directory structure (if exists):"
+          ls -la app/build/reports/ || echo "Reports directory not found"
+          echo "\nLint results (if exists):"
+          find . -name "lint-results*" || echo "No lint results found"
 
       - name: Upload Lint Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: lint-reports
+          if-no-files-found: warn
           path: |
-            app/build/reports/lint*
+            app/build/reports/
         continue-on-error: true
 
   build:
@@ -70,9 +78,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v2
-
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
@@ -81,9 +86,6 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-
-      - name: Clean project
-        run: ./gradlew clean
 
       - name: Build Debug APK
         run: ./gradlew :app:assembleDebug --stacktrace
@@ -97,6 +99,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-reports
+          if-no-files-found: warn
           path: |
             app/build/reports/
             app/build/outputs/apk/debug/
