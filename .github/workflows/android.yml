@@ -5,6 +5,9 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:  # Allows manual triggering
+  schedule:
+    - cron: '0 0 * * *'  # Daily build at midnight UTC
 
 permissions:
   contents: read
@@ -21,6 +24,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: 'gradle'
 
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v2
@@ -33,6 +37,9 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
+      - name: Clean Project
+        run: ./gradlew clean
 
       - name: Run Android Lint
         continue-on-error: true
@@ -60,15 +67,19 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: lint-reports
+          name: lint-reports-${{ github.sha }}
           if-no-files-found: warn
           path: |
             app/build/reports/
+            app/lint-baseline.xml
         continue-on-error: true
 
   build:
     needs: code-quality
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        build-type: [debug, release]
     steps:
       - uses: actions/checkout@v4
 
@@ -77,6 +88,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: 'gradle'
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
@@ -87,20 +99,68 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build Debug APK
-        run: ./gradlew :app:assembleDebug --stacktrace
+      - name: Clean Project
+        run: ./gradlew clean
+
+      - name: Build ${{ matrix.build-type }} APK
+        run: ./gradlew :app:assemble${{ matrix.build-type }} --stacktrace
 
       - name: Run Tests
+        run: ./gradlew test${{ matrix.build-type }}UnitTest --no-daemon --stacktrace
         continue-on-error: true
-        run: ./gradlew test --no-daemon --stacktrace
 
-      - name: Upload Build Reports
+      - name: Upload Build Artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: build-reports
+          name: app-${{ matrix.build-type }}-${{ github.sha }}
+          if-no-files-found: error
+          path: |
+            app/build/outputs/apk/${{ matrix.build-type }}/*.apk
+            app/build/outputs/mapping/${{ matrix.build-type }}/mapping.txt
+            app/build/outputs/logs/
+        continue-on-error: false
+
+      - name: Upload Test Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-${{ matrix.build-type }}-${{ github.sha }}
           if-no-files-found: warn
           path: |
-            app/build/reports/
-            app/build/outputs/apk/debug/
+            app/build/reports/tests/
+            app/build/test-results/
         continue-on-error: true
+
+  publish:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      - name: Create Release
+        if: github.event_name == 'push'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            artifacts/app-release-*/app-release.apk
+            artifacts/app-debug-*/app-debug.apk
+          name: Release ${{ github.sha }}
+          tag_name: v${{ github.run_number }}
+          body: |
+            Automated release for commit ${{ github.sha }}
+            
+            This release includes:
+            - Debug APK
+            - Release APK
+            - Test Reports
+            - Build Artifacts
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
