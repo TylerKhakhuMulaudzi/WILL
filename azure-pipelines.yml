@@ -28,7 +28,6 @@ steps:
       jdkArchitectureOption: 'x64'
       jdkSourceOption: 'PreInstalled'
 
-
   - task: Gradle@2
     inputs:
       workingDirectory: ''
