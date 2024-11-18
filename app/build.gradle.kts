@@ -2,8 +2,9 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
-    id("org.jlleitschuh.gradle.ktlint")
 }
+
+tasks.getByPath("preBuild").dependsOn("ktlintFormat")
 
 android {
     packaging {
@@ -119,4 +120,5 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    implementation("org.jlleitschuh.gradle:ktlint-gradle:11.3.2")
 }
