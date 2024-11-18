@@ -10,7 +10,9 @@ on:
     - cron: '0 0 * * *'  # Daily build at midnight UTC
 
 permissions:
-  contents: read
+  contents: write
+  issues: write
+  pull-requests: write
 
 jobs:
   code-quality:
@@ -137,19 +139,26 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v4
         with:
           path: artifacts
           merge-multiple: true
-
+          
+      - name: Display structure of downloaded files
+        run: ls -R artifacts/
+        
       - name: Create Release
         if: github.event_name == 'push'
         uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            artifacts/app-release-*/app-release.apk
-            artifacts/app-debug-*/app-debug.apk
+            artifacts/**/*.apk
+            artifacts/**/mapping.txt
           name: Release ${{ github.sha }}
           tag_name: v${{ github.run_number }}
           body: |
@@ -158,9 +167,10 @@ jobs:
             This release includes:
             - Debug APK
             - Release APK
-            - Test Reports
-            - Build Artifacts
+            - Mapping Files
+            
+            Build Number: ${{ github.run_number }}
+            Workflow Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           draft: false
           prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_unmatched_files: false
