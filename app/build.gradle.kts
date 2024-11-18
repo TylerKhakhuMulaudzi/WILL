@@ -89,6 +89,8 @@ dependencies {
     //firebase
     // Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
+    implementation("com.google.firebase:firebase-database")
+    implementation ("com.google.firebase:firebase-database:20.1.0")
 
     // Firebase Realtime Database
     implementation ("com.google.firebase:firebase-database-ktx")
@@ -106,4 +108,14 @@ dependencies {
 
     implementation("com.sun.mail:android-mail:1.6.7")
     implementation("com.sun.mail:android-activation:1.6.7")
+    implementation("com.google.firebase:firebase-database:20.2.1")
+
+    //Unit testing
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:4.1.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
 }
