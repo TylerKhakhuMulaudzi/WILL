@@ -35,7 +35,7 @@ android {
         ignoreWarnings = false
         textReport = true
         htmlReport = true
-        xmlReport = false
+        xmlReport = true
         sarifReport = true
         baseline = file("lint-baseline.xml")
         disable.addAll(setOf(
@@ -44,6 +44,9 @@ android {
             "Typos",
             "UnusedIds"
         ))
+        htmlOutput = file("build/reports/lint-results-debug.html")
+        xmlOutput = file("build/reports/lint-results-debug.xml")
+        sarifOutput = file("build/reports/lint-results.sarif")
     }
 
     compileOptions {
