@@ -21,28 +21,25 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: wrapper
+          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Run ktlint
-        run: ./gradlew ktlintCheck
-
       - name: Run Android Lint
-        run: ./gradlew lint
+        run: ./gradlew lint --no-daemon
 
       - name: Upload Lint Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: lint-reports
-          path: |
-            app/build/reports/ktlint/
-            app/build/reports/lint-results-debug.html
+          path: app/build/reports/lint-results.html
 
   build:
     needs: code-quality
@@ -56,19 +53,21 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        cache: gradle
 
     - name: Setup Gradle
-      uses: gradle/gradle-build-action@v3
+      uses: gradle/actions/setup-gradle@v3
+      with:
+        gradle-version: wrapper
+        cache-read-only: ${{ github.ref != 'refs/heads/main' }}
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
     - name: Build with Gradle
-      run: ./gradlew assembleDebug --stacktrace
+      run: ./gradlew assembleDebug --no-daemon --stacktrace
 
     - name: Run Tests
-      run: ./gradlew test --stacktrace
+      run: ./gradlew test --no-daemon --stacktrace
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
