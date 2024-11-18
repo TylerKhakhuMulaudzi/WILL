@@ -43,15 +43,19 @@ jobs:
           ./gradlew :app:lint --no-daemon --stacktrace
           echo "Lint completed with status $?"
 
+      - name: List Reports Directory
+        if: always()
+        run: |
+          echo "Listing reports directory:"
+          ls -R app/build/reports/
+
       - name: Upload Lint Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: lint-reports
           path: |
-            **/build/reports/lint-results-debug.html
-            **/build/reports/lint-results-debug.xml
-            **/build/reports/lint-results.sarif
+            app/build/reports/lint*
         continue-on-error: true
 
   build:
