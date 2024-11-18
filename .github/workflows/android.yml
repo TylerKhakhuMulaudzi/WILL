@@ -10,7 +10,41 @@ permissions:
   contents: read
 
 jobs:
+  code-quality:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          node-version: 20
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Run ktlint
+        run: ./gradlew ktlintCheck
+
+      - name: Run Android Lint
+        run: ./gradlew lint
+
+      - name: Upload Lint Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-reports
+          path: |
+            **/build/reports/ktlint/
+            **/build/reports/lint-results-debug.html
+
   build:
+    needs: code-quality
     runs-on: ubuntu-latest
 
     steps:
